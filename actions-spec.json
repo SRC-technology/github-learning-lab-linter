@@ -121,5 +121,13 @@
                 "required": false
             }
         ]
+    ],
+    "deleteBranch": [
+        [
+            "branch",
+            {
+                "required": true
+            }
+        ]
     ]
 }
