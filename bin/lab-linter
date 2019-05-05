@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+const yaml = require('js-yaml')
+const fs = require('fs')
+const { validateConfig } = require('..')
+
+try {
+  const doc = yaml.safeLoad(fs.readFileSync(process.argv[2], 'utf8'))
+  console.log(doc)
+
+  const errors = validateConfig(doc)
+  console.log('output')
+  console.log(errors)
+  
+  if (errors.length > 0) {
+    process.exit(1)
+  }
+} catch (e) {
+  console.log(e)
+}
