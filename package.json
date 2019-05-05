@@ -2,12 +2,13 @@
   "name": "github-learning-lab-linter",
   "version": "0.0.2",
   "bin": {
-    "lab-linter": "./bin/lab-linter"
+    "lab-linter": "./bin/lab-linter.js"
   },
   "main": "index.js",
   "author": "Fernando Via Canel <fernando.via@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.2",
     "js-yaml": "^3.13.1"
   }
 }

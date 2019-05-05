@@ -21,8 +21,9 @@ const validateUnnecessaryKeys = (action, actionSpec) =>
             problem: `Unnecessary '${key}'`
         }))
 
-const validateAction = (action, path) => {
-    console.log('validating action', path)
+const validateAction = (action, path, verbose = false) => {
+    if (verbose) console.log('validating action', path)
+    
     if (actionsSpec[action.type] === undefined) {
         return [
             {
@@ -62,19 +63,19 @@ const validateAction = (action, path) => {
         }))
 }
 
-const validateStep = (step, path) => 
-    (console.log('validating step', path), true) &&
+const validateStep = (step, path, verbose = false) => 
+    (verbose ? console.log('validating step', path) : undefined, true) &&
     step.actions.map((action, index) =>
-        validateAction(action, [...path, 'actions', index])
+        validateAction(action, [...path, 'actions', index], verbose)
     )
         .filter((x) => x.length > 0)
         .reduce((a, b) => a.concat(b), [])
 
 
-const validateConfig = (config) => 
-    (console.log('validating config'), true) && 
+const validateConfig = (config, verbose = false) => 
+    (verbose ? console.log('validating config') : undefined, true) && 
     config.steps.map((step, index) => 
-        validateStep(step, ['steps', index])
+        validateStep(step, ['steps', index], verbose)
     )
         .reduce((a, b) => a.concat(b), [])
 

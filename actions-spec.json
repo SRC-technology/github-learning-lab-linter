@@ -4,7 +4,7 @@
             "filename", 
             {
                 "required": true,
-                "regexp": "/^[^\\.][^\\/]/"
+                "regexp": "^[^\\.][^\\/]"
             }
         ],
         [
@@ -101,6 +101,22 @@
         ],
         [
             "action_id",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "requestReviewFromRegistrant": [
+        [
+            "pullRequest",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "mergePullRequest": [
+        [
+            "pullRequest",
             {
                 "required": false
             }
