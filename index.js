@@ -34,7 +34,7 @@ const validateAction = (action, path, verbose = false) => {
         ]
     }
 
-    const regexpErrors = getKeyWithRegexps(actionsSpec[action.type])
+    const regexpErrors = getKeyWithRegexps(actionsSpec[action.type].keys)
         .map(([key, { regexp }]) => {
             if (action[key]) {
                 if ((new RegExp(regexp)).test(action[key])) {
@@ -52,8 +52,10 @@ const validateAction = (action, path, verbose = false) => {
         .filter(x => x !== undefined)
 
     return [
-        ...validateRequiredKeys(action, actionsSpec[action.type]),
-        ...validateUnnecessaryKeys(action, actionsSpec[action.type]),
+        ...validateRequiredKeys(action, actionsSpec[action.type].keys),
+        ...(actionsSpec[action.type].allowUnknownKeys === true 
+            ? [] 
+            : validateUnnecessaryKeys(action, actionsSpec[action.type].keys)),
         ...regexpErrors
     ]
         .map(error => ({

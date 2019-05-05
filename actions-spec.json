@@ -1,133 +1,166 @@
 {
-    "getFileContents": [
-        [
-            "filename", 
-            {
-                "required": true,
-                "regexp": "^[^\\.][^\\/]"
-            }
-        ],
-        [
-            "action_id",
-            {
-                "required": false
-            }
+    "getFileContents": {
+        "keys": [
+            [
+                "filename", 
+                {
+                    "required": true,
+                    "regexp": "^[^\\.][^\\/]"
+                }
+            ],
+            [
+                "action_id",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "gate": [
-        [
-            "left",
-            {
-                "required": true
-            }
-        ],
-        [
-            "operator",
-            {
-                "required": true
-            }
-        ],
-        [
-            "right",
-            {
-                "required": true
-            }
-        ],
-        [
-            "else",
-            {
-                "required": false
-            }
+    },
+    "gate": {
+        "keys": [
+            [
+                "left",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "operator",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "right",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "else",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "assignRegistrant": [
-        [
-            "issue",
-            {
-                "required": false
-            }
+    },
+    "assignRegistrant": {
+        "keys": [
+            [
+                "issue",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "respond": [
-        [
-            "with",
-            {
-                "required": true
-            }
-        ],
-        [
-            "issue",
-            {
-                "required": false
-            }
-        ],
-        [
-            "data",
-            {
-                "required": false
-            }
+    },
+    "respond": {
+        "keys": [
+            [
+                "with",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "issue",
+                {
+                    "required": false
+                }
+            ],
+            [
+                "data",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "createPullRequest": [
-        [
-            "title",
-            {
-                "required": true
-            }
-        ],
-        [
-            "body",
-            {
-                "required": true
-            }
-        ],
-        [
-            "head",
-            {
-                "required": true
-            }
-        ],
-        [
-            "base",
-            {
-                "required": false
-            }
-        ],
-        [
-            "comments",
-            {
-                "required": false
-            }
-        ],
-        [
-            "action_id",
-            {
-                "required": false
-            }
+    },
+    "createPullRequest": {
+        "keys": [
+            [
+                "title",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "body",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "head",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "base",
+                {
+                    "required": false
+                }
+            ],
+            [
+                "comments",
+                {
+                    "required": false
+                }
+            ],
+            [
+                "action_id",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "requestReviewFromRegistrant": [
-        [
-            "pullRequest",
-            {
-                "required": false
-            }
+    },
+    "requestReviewFromRegistrant": {
+        "keys": [
+            [
+                "pullRequest",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "mergePullRequest": [
-        [
-            "pullRequest",
-            {
-                "required": false
-            }
+    },
+    "mergePullRequest": {
+        "keys": [
+            [
+                "pullRequest",
+                {
+                    "required": false
+                }
+            ]
         ]
-    ],
-    "deleteBranch": [
-        [
-            "branch",
-            {
-                "required": true
-            }
+    },
+    "deleteBranch": {
+        "keys": [
+            [
+                "branch",
+                {
+                    "required": true
+                }
+            ]
         ]
-    ]
+    },
+    "octokit": {
+        "keys": [
+            [
+                "method",
+                {
+                    "required": true
+                }
+            ],
+            [
+                "requester",
+                {
+                    "required": false
+                }
+            ]
+        ],
+        "allowUnknownKeys": true
+    }
 }

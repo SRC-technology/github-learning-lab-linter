@@ -100,3 +100,6 @@ steps:
     data:
       next_pr: '%actions.app_pr.data.html_url%'
   - type: mergePullRequest
+  - type: octokit
+    method: something.somewhere
+    title: That
