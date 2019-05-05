@@ -48,7 +48,6 @@ steps:
     operator: test
     right: '%actions.fileContents%'
   - type: respond
-    with: 01.01-install-vs-code.md
 
 - title: 'Local Setup: VS Code'
   description: Install VS Code
@@ -57,3 +56,6 @@ steps:
   actions:
   - type: respond
     with: 01.02-build-project.md
+  - type: getFileContents
+    action_id: fileContents
+    filename: './yarn.lock'

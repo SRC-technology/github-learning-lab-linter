@@ -1,20 +1,65 @@
+const actionsSpec = require('./actions-spec.json')
+
+const getRequiredKeys = actionSpec => 
+    actionSpec.filter(([_, { required }]) => required).map(([key]) => key)
+
+const getKeyWithRegexps = actionSpec =>
+    actionSpec.filter(([_, { regexp }]) => regexp !== undefined)
+
+const validateRequiredKeys = (action, actionSpec) => 
+    getRequiredKeys(actionSpec)
+        .filter(key => action[key] === undefined)
+        .map(key => ({
+            problem: `Missing '${key}'`
+        }))
+
+const validateUnnecessaryKeys = (action, actionSpec) =>
+    Object
+        .keys(action)
+        .filter(key => key !== 'type' && !actionSpec.map(([key]) => key).includes(key))
+        .map(key => ({
+            problem: `Unnecessary '${key}'`
+        }))
+
 const validateAction = (action, path) => {
     console.log('validating action', path)
-    switch (action.type) {
-        case 'getFileContents': {
-            if (action.filename === undefined) {
-                return {
-                    path,
-                    type: 'getFileContents',
-                    problem: 'Missing `filename`'
+    if (actionsSpec[action.type] === undefined) {
+        return [
+            {
+                path,
+                type: action.type,
+                problem: `Unrecognized action type '${action.type}'`
+            }
+        ]
+    }
+
+    const regexpErrors = getKeyWithRegexps(actionsSpec[action.type])
+        .map(([key, { regexp }]) => {
+            if (action[key]) {
+                if ((new RegExp(regexp)).test(action[key])) {
+                    return undefined
+                } else {
+                    return {
+                        problem: `Value '${action[key]}' for '${key}' does not match the spec format`,
+                        regexp
+                    }
                 }
             }
-        }
 
-        default: {
             return undefined
-        }
-    }
+        })
+        .filter(x => x !== undefined)
+
+    return [
+        ...validateRequiredKeys(action, actionsSpec[action.type]),
+        ...validateUnnecessaryKeys(action, actionsSpec[action.type]),
+        ...regexpErrors
+    ]
+        .map(error => ({
+            ...error,
+            path,
+            type: action.type
+        }))
 }
 
 const validateStep = (step, path) => 
@@ -22,7 +67,7 @@ const validateStep = (step, path) =>
     step.actions.map((action, index) =>
         validateAction(action, [...path, 'actions', index])
     )
-        .filter((x) => x !== undefined)
+        .filter((x) => x.length > 0)
         .reduce((a, b) => a.concat(b), [])
 
 

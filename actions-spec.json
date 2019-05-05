@@ -1,0 +1,109 @@
+{
+    "getFileContents": [
+        [
+            "filename", 
+            {
+                "required": true,
+                "regexp": "/^[^\\.][^\\/]/"
+            }
+        ],
+        [
+            "action_id",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "gate": [
+        [
+            "left",
+            {
+                "required": true
+            }
+        ],
+        [
+            "operator",
+            {
+                "required": true
+            }
+        ],
+        [
+            "right",
+            {
+                "required": true
+            }
+        ],
+        [
+            "else",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "assignRegistrant": [
+        [
+            "issue",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "respond": [
+        [
+            "with",
+            {
+                "required": true
+            }
+        ],
+        [
+            "issue",
+            {
+                "required": false
+            }
+        ],
+        [
+            "data",
+            {
+                "required": false
+            }
+        ]
+    ],
+    "createPullRequest": [
+        [
+            "title",
+            {
+                "required": true
+            }
+        ],
+        [
+            "body",
+            {
+                "required": true
+            }
+        ],
+        [
+            "head",
+            {
+                "required": true
+            }
+        ],
+        [
+            "base",
+            {
+                "required": false
+            }
+        ],
+        [
+            "comments",
+            {
+                "required": false
+            }
+        ],
+        [
+            "action_id",
+            {
+                "required": false
+            }
+        ]
+    ]
+}
